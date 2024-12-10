@@ -26,7 +26,7 @@ public:
 		theta = _theta;
 	}
 	
-	void updateCords(){
+	void setHead(){
 		head.x = len * cos(theta) + base.x;
 		head.y = len * sin(theta) + base.y;
 	}
@@ -34,22 +34,22 @@ public:
 		base.x = x;
 		base.y = y;
 	}
+	void setHead(float x, float y){
+		head.x = x;
+		head.y = y;
+	}
 	void follow(float x, float y){
 		float dy = y - base.y;
 		float dx = x - base.x;
 		theta = atan2(dy, dx);
-		theta += M_PI;
-		setBase(x, y);
-		updateCords();
-		swap();
+		setHead(x, y);
+		setBase(head.x - len * cos(theta), head.y - len * sin(theta));
 	}
-	void swap(){
-		float tx = base.x;
-		float ty = base.y;
-		base.x = head.x;
-		base.y = head.y;
-		head.x = tx;
-		head.y = ty;
+	void backTo(float x, float y){
+		float dx = base.x - x;
+		float dy = base.y - y;
+		setBase(x, y);
+		setHead(head.x - dx, head.y - dy);
 	}
 
 	float theta, len;
@@ -75,13 +75,9 @@ void loop() {
     for(int i = arrSize - 2; i >= 0; i--){
       links[i] -> follow(links[i + 1] -> base.x, links[i + 1] -> base.y);
     }
-    links[0] -> setBase(0, 0);
-    links[0] -> theta += M_PI;
-    links[0] -> updateCords();
+    links[0] -> backTo(0, 0);
     for(int i = 1; i < arrSize; i++){
-      links[i] -> setBase(links[i - 1] -> head.x, links[i - 1] -> head.y);
-      links[i] -> theta += M_PI;
-      links[i] -> updateCords();
+      links[i] -> backTo(links[i - 1] -> head.x, links[i - 1] -> head.y);
     }
     for(int i = 0; i < arrSize; i++){
       Serial.println(links[i] -> theta);
