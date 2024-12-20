@@ -15,5 +15,5 @@ public:
   Point();
   Point(float x, float y, float z);
   set(float x, float y, float z);
-}
+};
 #endif

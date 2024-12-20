@@ -14,13 +14,12 @@
 
 class Arm{
 public:
-  int linksCount;
+  int linksCount = 0;
   Link* links[5];
   float thetas[5];
-  Arm();
-  void defineLink(float x_, float y_, float len, float theta);
-  float calculateAngles(Point end_effector);
+  void addLink(float x_, float y_, float len, float theta);
+  float calculateAngles(Point target);
   float* getAngles();
-}
+};
 
-#endif // Inverse_Kinematics_H
+#endif
