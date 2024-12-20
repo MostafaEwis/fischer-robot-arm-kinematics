@@ -14,6 +14,7 @@ class Point{
 public:
   Point();
   Point(float x, float y, float z);
-  set(float x, float y, float z);
+  void set(float x, float y, float z);
+  float x, y, z;
 };
 #endif

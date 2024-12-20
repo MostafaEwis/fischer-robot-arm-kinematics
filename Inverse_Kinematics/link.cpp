@@ -5,8 +5,8 @@
 #include "link.h"
 
 Link::Link(float _x, float _y, float _len, float _theta){
-    Point base(_x, _y);
-    Point head(_len * cos(_theta), _len * sin(_theta));
+    Point base(_x, _y, 0);
+    Point head(_len * cos(_theta), _len * sin(_theta), 0);
     len = _len;
     theta = _theta;
 }

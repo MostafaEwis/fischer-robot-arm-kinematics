@@ -1,6 +1,7 @@
 #include "arm.h"
 #include "link.h"
 #include "point.h"
+
 void Arm::addLink(float x_, float y_, float len, float theta){
     if(linksCount < 10){
         links[linksCount] = new Link(x_, y_, len, theta);
